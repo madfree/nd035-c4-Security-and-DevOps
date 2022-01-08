@@ -64,7 +64,7 @@ public class UserController {
 	}
 
 	private boolean passwordValid(String password, String confirmPassword) {
-		return password.length() < 8 && password.equals(confirmPassword);
+		return password.length() >= 8 && password.equals(confirmPassword);
 	}
 
 }
