@@ -38,7 +38,7 @@ public class OrderController {
 		if (orderResponse.getStatusCode().isError()) {
 			log.error("Error! Could not process order: " + orderResponse.getStatusCode().getReasonPhrase());
 		} else {
-			log.debug("Order successfully submitted with id: " + orderResponse.getBody().getId());
+			log.info("Order successfully submitted with id: " + orderResponse.getBody().getId());
 		}
 		return orderResponse;
 	}
@@ -47,12 +47,12 @@ public class OrderController {
 	public ResponseEntity<List<UserOrder>> getOrdersForUser(@PathVariable String username) {
 		User user = userRepository.findByUsername(username);
 		if(user == null) {
-			log.error("User not found:" + username);
+			log.debug("User not found:" + username);
 			return ResponseEntity.notFound().build();
 		}
 		ResponseEntity<List<UserOrder>> userOrderHistory = ResponseEntity.ok(orderRepository.findByUser(user));
 		if (userOrderHistory.getStatusCode().isError()) {
-			log.error("Could not load user order history");
+			log.warn("Could not load user order history");
 		} else {
 			log.debug("Successfully fetched user order history");
 		}

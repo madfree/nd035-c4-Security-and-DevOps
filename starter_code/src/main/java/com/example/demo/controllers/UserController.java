@@ -31,7 +31,7 @@ public class UserController {
 	public ResponseEntity<User> findById(@PathVariable Long id) {
 		ResponseEntity<User> userResponse = ResponseEntity.of(userRepository.findById(id));
 		if (userResponse.getStatusCode().isError()) {
-			log.error("User for id not found: " + id);
+			log.warn("User for id not found: " + id);
 		} else {
 			log.debug("Found user with name: " + userResponse.getBody().getUsername());
 		}
@@ -43,7 +43,7 @@ public class UserController {
 		User user = userRepository.findByUsername(username);
 
 		if (user == null) {
-			log.error("User not found: " + username);
+			log.warn("User not found: " + username);
 		} else {
 			log.debug("Found user with name: " + user.getUsername());
 		}
@@ -72,7 +72,7 @@ public class UserController {
 		if (userResponse.getStatusCode().isError()) {
 			log.error("Could not create user: " + user.getUsername());
 		} else {
-			log.debug("Created user with name: " + user.getUsername());
+			log.info("Created user with name: " + user.getUsername());
 		}
 		return userResponse;
 	}
