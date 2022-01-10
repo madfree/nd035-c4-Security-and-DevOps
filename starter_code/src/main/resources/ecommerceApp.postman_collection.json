@@ -12,7 +12,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"username\" : \"Matthias\"\n}",
+					"raw": "{\n    \"username\" : \"Matthias\",\n    \"password\" : \"test123456\",\n    \"confirmPassword\" : \"test123456\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -38,9 +38,28 @@
 		{
 			"name": "Login",
 			"request": {
-				"method": "GET",
+				"method": "POST",
 				"header": [],
-				"url": null
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"username\" : \"Matthias\",\n    \"password\" : \"test123456\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/login",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"login"
+					]
+				}
 			},
 			"response": []
 		},
@@ -51,7 +70,13 @@
 			},
 			"request": {
 				"method": "GET",
-				"header": [],
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "",
+						"type": "text"
+					}
+				],
 				"body": {
 					"mode": "raw",
 					"raw": "",
@@ -81,7 +106,13 @@
 			"name": "AddToChart",
 			"request": {
 				"method": "POST",
-				"header": [],
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "",
+						"type": "text"
+					}
+				],
 				"body": {
 					"mode": "raw",
 					"raw": "{\n    \"username\" : \"Matthias\",\n    \"itemId\" : 1,\n    \"quantity\": 1\n}",
@@ -111,7 +142,13 @@
 			"name": "SubmitOrdner",
 			"request": {
 				"method": "POST",
-				"header": [],
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "",
+						"type": "text"
+					}
+				],
 				"body": {
 					"mode": "raw",
 					"raw": "",
@@ -142,9 +179,15 @@
 			"name": "GetOrderHistory",
 			"request": {
 				"method": "GET",
-				"header": [],
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "",
+						"type": "text"
+					}
+				],
 				"url": {
-					"raw": "http://localhost:8080/api/order/history/Matthias",
+					"raw": "http://localhost:8080/api/order/history/Matthias?",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -155,6 +198,12 @@
 						"order",
 						"history",
 						"Matthias"
+					],
+					"query": [
+						{
+							"key": "",
+							"value": null
+						}
 					]
 				}
 			},
@@ -164,7 +213,13 @@
 			"name": "GetItemById",
 			"request": {
 				"method": "GET",
-				"header": [],
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "",
+						"type": "text"
+					}
+				],
 				"url": {
 					"raw": "http://localhost:8080/api/item/1",
 					"protocol": "http",
