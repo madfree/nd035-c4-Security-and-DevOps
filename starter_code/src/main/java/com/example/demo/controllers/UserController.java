@@ -43,9 +43,9 @@ public class UserController {
 		User user = userRepository.findByUsername(username);
 
 		if (user == null) {
-			log.warn("User not found: " + username);
+			log.warn("USER_NOT_FOUND: " + username);
 		} else {
-			log.debug("Found user with name: " + user.getUsername());
+			log.debug("USER_FOUND_SUCCESS: " + user.getUsername());
 		}
 		return user == null ? ResponseEntity.notFound().build() : ResponseEntity.ok(user);
 	}
@@ -56,7 +56,7 @@ public class UserController {
 		user.setUsername(createUserRequest.getUsername());
 		String password = createUserRequest.getPassword();
 		if (!passwordValid(password, createUserRequest.getConfirmPassword())) {
-			log.debug("Tried to create username with invalid password");
+			log.debug("USER_CREATE_FAIL - tried to create username with invalid password");
 			return ResponseEntity.badRequest().build();
 		} else {
 			user.setPassword(bCryptPasswordEncoder.encode(password));
@@ -70,9 +70,9 @@ public class UserController {
 
 		ResponseEntity<User> userResponse = ResponseEntity.ok(user);
 		if (userResponse.getStatusCode().isError()) {
-			log.error("Could not create user: " + user.getUsername());
+			log.error("USER_CREATE_FAIL - could not create user: " + user.getUsername());
 		} else {
-			log.info("Created user with name: " + user.getUsername());
+			log.info("USER_CREATE_SUCCESS - created user with name: " + user.getUsername());
 		}
 		return userResponse;
 	}
