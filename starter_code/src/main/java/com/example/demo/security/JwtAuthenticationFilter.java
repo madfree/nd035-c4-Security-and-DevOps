@@ -3,6 +3,8 @@ package com.example.demo.security;
 import com.auth0.jwt.JWT;
 import com.example.demo.model.persistence.User;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -20,6 +22,8 @@ import java.util.Date;
 import static com.auth0.jwt.algorithms.Algorithm.HMAC512;
 
 public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilter {
+
+    public static final Logger log = LoggerFactory.getLogger(JwtAuthenticationFilter.class);
 
     private AuthenticationManager authenticationManager;
 
@@ -39,7 +43,8 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
                             credentials.getUsername(),
                             credentials.getPassword(),
                             new ArrayList<>()));
-        } catch (IOException e) {
+        } catch (RuntimeException | IOException e) {
+            log.error("Authentication error: " + e.getMessage());
             throw new RuntimeException(e);
         }
     }
