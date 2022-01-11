@@ -56,7 +56,7 @@ public class UserController {
 		user.setUsername(createUserRequest.getUsername());
 		String password = createUserRequest.getPassword();
 		if (!passwordValid(password, createUserRequest.getConfirmPassword())) {
-			log.debug("USER_CREATE_FAIL - tried to create username with invalid password");
+			log.error("USER_CREATE_FAIL - tried to create username with invalid password");
 			return ResponseEntity.badRequest().build();
 		} else {
 			user.setPassword(bCryptPasswordEncoder.encode(password));
